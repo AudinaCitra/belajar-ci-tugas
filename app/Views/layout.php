@@ -53,7 +53,7 @@ if(uri_string()!=""){
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1><?php echo $hlm ?></h1>
       <nav>
         <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
@@ -74,7 +74,7 @@ if(uri_string()!=""){
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
+              <h5 class="card-title"><?php echo $hlm ?></h5>
             
               <?= $this->renderSection('content') ?>
         
