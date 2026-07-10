@@ -41,8 +41,9 @@ public function cart_add()
 	    'price'   => $this->request->getPost('harga'),
 	    'name'    => $this->request->getPost('nama'),
 	    'options' => [
-	        'foto' => $this->request->getPost('foto')
-	    ]
+    'foto'   => $this->request->getPost('foto'),
+    'diskon' => $this->request->getPost('diskon')
+]
 	]);
 	
 	session()->setFlashdata(
@@ -195,7 +196,7 @@ public function buy()
             'transaction_id' => $transactionId,
             'product_id'     => $item['id'],
             'jumlah'         => $item['qty'],
-            'diskon'         => 0,
+           'diskon'         => $item['options']['diskon'] ?? 0,
             'subtotal_harga' => $item['qty'] * $item['price'] 
         ]);
     }

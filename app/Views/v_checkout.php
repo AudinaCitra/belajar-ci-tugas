@@ -73,13 +73,24 @@
                 <?php
                 if (!empty($items)) :
                     foreach ($items as $index => $item) :
-                ?>
-                        <tr>
-                            <td><?= $item['name'] ?></td>
-                            <td><?= number_to_currency($item['price'], 'IDR') ?></td>
-                            <td><?= $item['qty'] ?></td>
-                            <td><?= number_to_currency($item['price'] * $item['qty'], 'IDR') ?></td>
-                        </tr>
+    $diskon = $item['options']['diskon'] ?? 0;
+    $hargaAsli = $item['price'] + $diskon;
+?>
+        <tr>
+            <td><?= $item['name'] ?></td>
+            <td>
+                <?php if ($diskon > 0) : ?>
+                    <small>
+                        <del><?= number_to_currency($hargaAsli, 'IDR') ?></del>
+                    </small><br>
+                    <?= number_to_currency($item['price'], 'IDR') ?>
+                <?php else : ?>
+                    <?= number_to_currency($item['price'], 'IDR') ?>
+                <?php endif; ?>
+            </td>
+            <td><?= $item['qty'] ?></td>
+            <td><?= number_to_currency($item['price'] * $item['qty'], 'IDR') ?></td>
+        </tr>
                 <?php
                     endforeach;
                 endif;

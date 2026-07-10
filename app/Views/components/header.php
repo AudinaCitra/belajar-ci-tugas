@@ -15,6 +15,14 @@
       </form>
     </div><!-- End Search Bar -->
 
+    <?php if (session()->get('diskon')) : ?>
+      <div class="ms-3">
+        <span class="badge bg-success">
+          Hari ini ada diskon IDR <?= number_format(session()->get('diskon'), 0, '.', ',') ?> per item
+        </span>
+      </div>
+    <?php endif; ?>
+
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 

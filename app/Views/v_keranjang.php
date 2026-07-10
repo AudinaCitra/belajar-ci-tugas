@@ -31,13 +31,24 @@ if (session()->getFlashData('success')) {
         $i = 1;
         if (!empty($items)) :
             foreach ($items as $index => $item) :
+                $diskon = $item['options']['diskon'] ?? 0;
+                $hargaAsli = $item['price'] + $diskon;
         ?>
                 <tr>
                     <td><?= $item['name'] ?></td>
                     <td>
                         <img src="<?= base_url() . "img/" . $item['options']['foto'] ?>" width="100px">
                     </td>
-                    <td><?= number_to_currency($item['price'], 'IDR') ?></td>
+                    <td>
+                        <?php if ($diskon > 0) : ?>
+                            <small>
+                                <del><?= number_to_currency($hargaAsli, 'IDR') ?></del>
+                            </small><br>
+                            <?= number_to_currency($item['price'], 'IDR') ?>
+                        <?php else : ?>
+                            <?= number_to_currency($item['price'], 'IDR') ?>
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <input type="number" min="1" name="qty<?= $i++ ?>" class="form-control" value="<?= $item['qty'] ?>">
                     </td>
